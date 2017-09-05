@@ -8,7 +8,7 @@ class YourAgeInNumber
     @current_year = Time.now.day, Time.now.month, Time.now.year
   end
 
-  def us_style_birthday
+  def print_numbers
     puts " you\'re #{cal_year} Years #{cal_month} month and #{cal_day} days old"
   end
 
@@ -31,4 +31,4 @@ end
 
 a = YourAgeInNumber.new(day:1, month:7, year:2015)
 
-puts a.us_style_birthday
+puts a.print_numbers
