@@ -1,46 +1,23 @@
 class NumberInWord
 
-  ONES = {
-    1 => 'one',
-    2 => 'two',
-    3 => 'three',
-    4 => 'four',
-    5 => 'five',
-    6 => 'six',
-    7 => 'seven',
-    8 => 'eight',
-    9 => 'nine',
-    0 => 'zero'
+  NUMBERS_HASH = {
+    90 => "ninety",   80 => "eighty",   70 => "seventy",
+    60 => "sixty",    50 => "fifty",    40 => "forty",
+    30 => "thirty",   20 => "twenty",   19 => "nineteen",
+    18 => "eighteen", 17 => "seventeen",16 => "sixteen",
+    15 => "fifteen",  14 => "fourteen", 13 => "thirteen",
+    12 => "twelve",   11 => "eleven",   10 => "ten",
+    9  => "nine",     8  => "eight",    7  => "seven",
+    6  => "six",      5  => "five",     4  => "four",
+    3  => "three",    2  => "two",      1  => "one",
   }
 
   def initialize(number)
     @number = number
   end
 
-  def find_ones(pos)
-    ONES.find{|k,v| v if k == @number.to_s[pos].to_i}
-  end
-
-  def find_tenth
-    tenth = {'eleven'=> 11,'twelve'=> 12,'thirteen'=> 13,'fourteen'=> 14,'fifteen'=> 15,'sixteen'=> 16,'seventeen'=> 17, 'eighteen' => 18,'nineteen'=> 19}
-    tenth.find{|k,v| k if v == @number}
-  end
-
-  def find_other(pos)
-    others = {'ten'=> 1,'twenty'=> 2,'thirty'=> 3,'fourty'=> 4,'fifty'=> 5,'sixty'=> 6,'seventy'=> 7, 'eighty' => 8,'ninety'=> 9}
-    others.find{|k,v| k if v == @number.to_s[pos].to_i}
-  end
-
-  def find_hundred(pos)
-    find_ones pos
-  end
-
-  def find_thousand(pos)
-    find_ones pos
-  end
-
-  def find_million_and_above(pos)
-    find_ones pos
+  def pos(pos)
+    @number.to_s[pos].to_i
   end
 
   def number_len
@@ -57,32 +34,41 @@ class NumberInWord
   end
 
   def print_word
-
-    if number_size == 1
-      puts "#{find_ones(0)}"
-    elsif number_size == 2
-      puts "#{find_tenth}"
-    elsif number_size == 3
-      puts "#{find_hundred(0)} hundred #{find_other(1)} #{ONES(2)}"
-    elsif number_size == 4
-      puts "#{find_thousand(0)} thousand  #{find_hundred(1)} hundred #{find_other(2)} #{ONES(3)}"
-    elsif number_size == 5
-      puts "#{find_other(0)} #{ONES(1)} thousand  #{find_hundred(2)} hundred #{find_other(3)} #{find_ones(4)}"
-    elsif number_size == 6
-      puts "#{find_hundred(0)} hundred #{find_other(1)} #{find_ones(2)} thousand  #{find_hundred(3)} hundred #{find_other(4)} #{find_ones(5)}"
-    elsif number_size == 7
-      puts "#{find_ones(0)} million #{find_hundred(1)} hundred #{find_other(2)} #{find_ones(3)}
-      thousand  #{find_hundred(4)} hundred #{find_other(5)} #{find_ones(6)}"
-    elsif number_size == 8
-      puts "#{find_other(0)} #{find_ones(1)} million #{find_hundred(2)} hundred #{find_other(3)} #{find_ones(4)}
-      thousand  #{find_hundred(5)} hundred #{find_other(6)} #{find_ones(7)}"
-    elsif number_size == 9
-       puts "#{find_hundred(0)} hundred #{find_other(1)} #{find_ones(2)} million #{find_hundred(3)} hundred #{find_other(4)} #{find_ones(5)}
-       thousand  #{find_hundred(6)} hundred #{find_other(7)} #{find_ones(8)}"
+    if NUMBERS_HASH.has_key?(@number)
+      puts NUMBERS_HASH[@number]
+    elsif (100..1000).include?(@number)
+      puts [NUMBERS_HASH[@number / 100], "hundred",
+      NUMBERS_HASH[@number - ((@number / 100) * 100) - (@number % 10)],
+      NUMBERS_HASH[@number % 10]].join(" ").strip
+    elsif (1001..10000).include?(@number)
+      puts [ NUMBERS_HASH[@number / 1000], "thousand",
+      NUMBERS_HASH[((@number - (@number / 1000) * 1000) - (@number % 100)) / 100], "hundred" ,
+      NUMBERS_HASH[((@number % 100) / 10) * 10], NUMBERS_HASH[@number % 10]].join(" ").strip
+    elsif (10001..100000).include?(@number)
+      puts [NUMBERS_HASH[(@number / 10000) * 10], NUMBERS_HASH[(@number % 10000) / 1000], "thousand",
+      NUMBERS_HASH[((@number - (@number / 1000) * 1000) - (@number % 100)) / 100], "hundred" ,
+      NUMBERS_HASH[((@number % 100) / 10) * 10], NUMBERS_HASH[@number % 10]].join(" ").strip
+    elsif (100001..1000000).include?(@number)
+      puts [NUMBERS_HASH[(@number / 100000)], "hundred",
+      NUMBERS_HASH[(((@number % 100000) / 10000)) * 10],
+      NUMBERS_HASH[(@number % 10000) / 1000], "thousand",
+      NUMBERS_HASH[((@number % 1000) / 100)], "hundred" ,
+      NUMBERS_HASH[((@number % 100) / 10) * 10], NUMBERS_HASH[@number % 10]].join(" ").strip
+    elsif (1000001..20000000).include?(@number)
+      puts [NUMBERS_HASH[(((@number % 100000000) / 1000000))], "million",
+      NUMBERS_HASH[(((@number % 1000000) / 100000))], "hundred",
+      NUMBERS_HASH[(((@number % 100000) / 10000)) * 10], NUMBERS_HASH[(((@number % 10000) / 1000))], "thousand",
+      NUMBERS_HASH[((@number % 1000) / 100)], "hundred" ,
+      NUMBERS_HASH[((@number % 100) / 10) * 10], NUMBERS_HASH[@number % 10]].join(" ").strip
+    elsif (20000001..100000000).include?(@number)
+      puts [NUMBERS_HASH[(((@number % 1000000000) / 10000000)) * 10],NUMBERS_HASH[(((@number % 10000000))) / 1000000], "million",
+      NUMBERS_HASH[(((@number % 1000000) / 100000))], "hundred",
+      NUMBERS_HASH[(((@number % 100000) / 10000)) * 10], NUMBERS_HASH[(((@number % 10000) / 1000))], "thousand",
+      NUMBERS_HASH[((@number % 1000) / 100)], "hundred" ,
+      NUMBERS_HASH[((@number % 100) / 10) * 10], NUMBERS_HASH[@number % 10]].join(" ").strip
     end
-
   end
 end
 
-n = NumberInWord.new(121876543)
+n = NumberInWord.new(99999999)
 print n.print_word
