@@ -35,7 +35,8 @@ Ruby experiments, some day to day life things and code tests
 
 # LongestLine
 
-```ruby challenges/longest-line/index.rb ./challenges/longest-line/sample.txt
+```
+ruby challenges/longest-line/index.rb ./challenges/longest-line/sample.txt
 San Francisco
 Hello World
 Quick Fox
