@@ -10,10 +10,10 @@ class LongestLine
       lines << line
     end
     num_lines = lines.delete_at(0).to_i # remove the 2
-    if sort_desc
-       lines.sort { |a, b| b.length <=> a.length }
-    else
+    if sort_asc
        lines.sort { |a, b| a.length <=> b.length }
+    else
+       lines.sort { |a, b| b.length <=> a.length }
     end
   end
 end
