@@ -30,3 +30,20 @@ Ruby experiments, some day to day life things and code tests
 1 F 3 F 5 F B F 9 F 11 F 13
 1 F 3 F 5 F B F 9 F 11 F 13 FB
 1 F 3 F 5 F B F 9 F 11 F 13 FB 15```
+
+
+# LongestLine
+
+```ruby challenges/longest-line/index.rb ./challenges/longest-line/sample.txt
+San Francisco
+Hello World
+Quick Fox
+CodeEval
+A
+
+-----
+A
+CodeEval
+Quick Fox
+Hello World
+San Francisco
