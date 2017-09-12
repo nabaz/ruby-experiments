@@ -53,7 +53,7 @@ San Francisco
 # Remove Characters
 
 ```
-ruby ./remove-character/index.rb ./remove-character/sample.txt
+ruby ./remove_character/index.rb ./remove_character/sample.txt
 hllo worl
 ha birhda
 
