@@ -49,3 +49,12 @@ CodeEval
 Quick Fox
 Hello World
 San Francisco
+
+# Remove Characters
+
+```
+ruby ./remove-character/index.rb ./remove-character/sample.txt
+hllo worl
+ha birhda
+
+```
