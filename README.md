@@ -49,7 +49,7 @@ CodeEval
 Quick Fox
 Hello World
 San Francisco
-
+```
 # Remove Characters
 
 ```
