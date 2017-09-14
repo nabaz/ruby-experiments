@@ -58,3 +58,15 @@ hllo worl
 ha birhda
 
 ```
+
+# Check Palindrome
+
+```
+irb palindorme/index.rb ./palindorme/sample.txt
+
+true
+true
+true
+false
+
+```
