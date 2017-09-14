@@ -20,5 +20,4 @@ class RemoveChar
 end
 
 ll = RemoveChar.new
-
 ll.remove_characters
